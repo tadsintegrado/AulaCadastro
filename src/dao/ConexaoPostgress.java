@@ -48,6 +48,7 @@ public class ConexaoPostgress {
             }
         }
     }
+
     public void desconecta() {
         boolean result = true;
         try {
@@ -57,6 +58,7 @@ public class ConexaoPostgress {
             result = false;
         }
     }
+
     public void executeSQL(String sql) {
         try {
             statement = ConexaoPostgress.createStatement(
@@ -66,6 +68,19 @@ public class ConexaoPostgress {
         } catch (SQLException sqlex) {
             JOptionPane.showMessageDialog(null, "Não foi possível localizar o registro \n" + sqlex);
         }
+    }
+
+    public int ultimasequencia(String tabela, String atributo) {
+        executeSQL("SELECT COALESCE(MAX(" + atributo + "),0) + 1 AS ULTIMO FROM "
+                + tabela);
+        int retorno = 0;
+        try {
+            resultset.first();
+            retorno = resultset.getInt("ULTIMO");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Registro nao encontrado");
+        }
+        return retorno;
     }
 
     public static void main(String[] args) {
