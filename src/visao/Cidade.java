@@ -95,6 +95,7 @@ public class Cidade extends javax.swing.JFrame {
         jTabbedPane1.addTab("Cadastro", jPCadastro);
         jPCadastro.getAccessibleContext().setAccessibleDescription("");
 
+        jTbConsulta.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 0, 0)));
         jTbConsulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
