@@ -2,9 +2,8 @@ package visao;
 
 import controle.CidadeControle;
 import ferramentas.PreencherJtableGenerico;
-import java.sql.SQLException;
+import ferramentas.Rotinas;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 import modelo.CidadeModelo;
 
 /**
@@ -18,6 +17,9 @@ public class Cidade extends javax.swing.JFrame {
 
     private PreencherJtableGenerico preencher = new PreencherJtableGenerico();
 
+    private int estado;
+    private int[] codestado = null;
+
     public Cidade() {
         initComponents();
 
@@ -30,16 +32,18 @@ public class Cidade extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPCadastro = new javax.swing.JPanel();
         jTFId = new javax.swing.JTextField();
-        jTFDescricao = new javax.swing.JTextField();
+        jTFCidade = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jBtNovo = new javax.swing.JButton();
+        jBtAlterar = new javax.swing.JButton();
+        jBtExcluir = new javax.swing.JButton();
+        jBtGravar = new javax.swing.JButton();
+        jBtCancelar = new javax.swing.JButton();
         jPConsulta = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTbConsulta = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,10 +53,43 @@ public class Cidade extends javax.swing.JFrame {
 
         jLabel2.setText("Descrição");
 
-        jButton1.setText("INCLUIR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jBtNovo.setText("Novo");
+        jBtNovo.setPreferredSize(new java.awt.Dimension(85, 25));
+        jBtNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jBtNovoActionPerformed(evt);
+            }
+        });
+
+        jBtAlterar.setText("Alterar");
+        jBtAlterar.setPreferredSize(new java.awt.Dimension(85, 25));
+        jBtAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtAlterarActionPerformed(evt);
+            }
+        });
+
+        jBtExcluir.setText("Excluir");
+        jBtExcluir.setPreferredSize(new java.awt.Dimension(85, 25));
+        jBtExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtExcluirActionPerformed(evt);
+            }
+        });
+
+        jBtGravar.setText("Gravar");
+        jBtGravar.setPreferredSize(new java.awt.Dimension(85, 25));
+        jBtGravar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtGravarActionPerformed(evt);
+            }
+        });
+
+        jBtCancelar.setText("Cancelar");
+        jBtCancelar.setPreferredSize(new java.awt.Dimension(85, 25));
+        jBtCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtCancelarActionPerformed(evt);
             }
         });
 
@@ -61,20 +98,27 @@ public class Cidade extends javax.swing.JFrame {
         jPCadastroLayout.setHorizontalGroup(
             jPCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPCadastroLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
                 .addGroup(jPCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPCadastroLayout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addGroup(jPCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTFId, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addGap(33, 33, 33)
-                        .addGroup(jPCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jTFDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPCadastroLayout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(412, Short.MAX_VALUE))
+                    .addComponent(jTFId, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(33, 33, 33)
+                .addGroup(jPCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jTFCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPCadastroLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBtNovo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(jBtAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(jBtExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(jBtGravar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(jBtCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(273, 273, 273))
         );
         jPCadastroLayout.setVerticalGroup(
             jPCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -86,10 +130,15 @@ public class Cidade extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTFId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTFDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 331, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                    .addComponent(jTFCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(106, 106, 106)
+                .addGroup(jPCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBtNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtGravar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Cadastro", jPCadastro);
@@ -117,52 +166,27 @@ public class Cidade extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Pesquisa");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        jButton4.setText("Limpar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPConsultaLayout = new javax.swing.GroupLayout(jPConsulta);
         jPConsulta.setLayout(jPConsultaLayout);
         jPConsultaLayout.setHorizontalGroup(
             jPConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPConsultaLayout.createSequentialGroup()
-                .addContainerGap(605, Short.MAX_VALUE)
-                .addComponent(jButton3)
-                .addGap(28, 28, 28)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addGap(29, 29, 29))
             .addGroup(jPConsultaLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 686, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 666, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(104, Short.MAX_VALUE))
         );
         jPConsultaLayout.setVerticalGroup(
             jPConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPConsultaLayout.createSequentialGroup()
                 .addGap(38, 38, 38)
-                .addGroup(jPConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addGroup(jPConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPConsultaLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPConsultaLayout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(jButton4)))
-                .addContainerGap(133, Short.MAX_VALUE))
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Consulta", jPConsulta);
@@ -171,71 +195,74 @@ public class Cidade extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 509, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(855, 599));
+        setSize(new java.awt.Dimension(818, 328));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     //   modcidade.setIdcidade(10);
-        modcidade.setDescricao(jTFDescricao.getText());
-
-        daocidade.incluir(modcidade);
-        jTFId.setText(Integer.toString(modcidade.getIdcidade()));
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
-        
+
         preencher.FormatarJtable(jTbConsulta, new int[]{150, 500});
 
         preencher.PreencherJtableGenerico(jTbConsulta,
                 new String[]{"IDCIDADE", "DSCIDADE"},
                 daocidade.consultageral());
-        
-        
+
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jBtNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtNovoActionPerformed
+        estado = Rotinas.INCLUIR;
+        estadobotoes(1);
 
-        jTbConsulta.getColumnModel().getColumn(0).setPreferredWidth(200);
-        jTbConsulta.getColumnModel().getColumn(1).setPreferredWidth(500);
+        //   modcidade.setIdcidade(10);
+        modcidade.setDescricao(jTFCidade.getText());
 
-        
-        
-        
-        
-        
-        DefaultTableModel modelo = (DefaultTableModel) jTbConsulta.getModel();
-        modelo.setNumRows(0);
-        
-//        try {
-//            while (resultSet.next()) {
-//                int len = campos.length;
-//                Object[] row = new Object[len];
-//                for (int i = 0; i < len; i++) {
-//                    row[i] = resultSet.getString(campos[i]);
-//                }
-//                modelo.addRow(row);
-//            }
-//        } catch (SQLException erro) {
-//            JOptionPane.showMessageDialog(null, "Erro ao listar no JTable " + erro);
-//        }
+        daocidade.incluir(modcidade);
+        jTFId.setText(Integer.toString(modcidade.getIdcidade()));
+    }//GEN-LAST:event_jBtNovoActionPerformed
 
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void jBtAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtAlterarActionPerformed
+        estado = Rotinas.ALTERAR;
+        estadobotoes(1);
+    }//GEN-LAST:event_jBtAlterarActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-       preencher.limparJtable(jTbConsulta);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void jBtExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtExcluirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtExcluirActionPerformed
+
+    private void jBtGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtGravarActionPerformed
+
+        if (jTFCidade.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Descrição Obrigatoria");
+            jTFCidade.grabFocus();
+            return;
+        } else {
+
+            setcomp();
+            if (estado == Rotinas.INCLUIR) {
+                daocidade.incluir(modcidade);
+            } else if (estado == Rotinas.ALTERAR) {
+                daocidade.alterar(modcidade);
+            }
+            getcomp();
+            estadobotoes(0);
+        }
+
+    }//GEN-LAST:event_jBtGravarActionPerformed
+
+    private void jBtCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtCancelarActionPerformed
+        estadobotoes(0);
+    }//GEN-LAST:event_jBtCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -269,18 +296,49 @@ public class Cidade extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jBtAlterar;
+    private javax.swing.JButton jBtCancelar;
+    private javax.swing.JButton jBtExcluir;
+    private javax.swing.JButton jBtGravar;
+    private javax.swing.JButton jBtNovo;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPCadastro;
     private javax.swing.JPanel jPConsulta;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTFDescricao;
+    private javax.swing.JTextField jTFCidade;
     private javax.swing.JTextField jTFId;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTbConsulta;
     // End of variables declaration//GEN-END:variables
+
+    public void estadobotoes(int situacao) { // 0 - normal, 1 inclusao
+        if (situacao == 0) {
+            jBtNovo.setEnabled(true);
+            jBtAlterar.setEnabled(true);
+            jBtExcluir.setEnabled(true);
+            jBtGravar.setEnabled(false);
+            jBtCancelar.setEnabled(false);
+        } else {
+            jBtNovo.setEnabled(false);
+            jBtAlterar.setEnabled(false);
+            jBtExcluir.setEnabled(false);
+            jBtGravar.setEnabled(true);
+            jBtCancelar.setEnabled(true);
+        }
+    }
+
+    public void setcomp() {
+        if (estado == Rotinas.ALTERAR) {
+            modcidade.setIdcidade(Integer.parseInt(jTFId.getText()));
+        }
+        modcidade.setDescricao(jTFCidade.getText());
+    }
+
+    public void getcomp() {
+        jTFId.setText(Integer.toString(modcidade.getIdcidade()));
+        jTFCidade.setText(modcidade.getDescricao());
+    }
+
 }

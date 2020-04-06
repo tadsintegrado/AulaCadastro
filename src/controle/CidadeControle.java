@@ -28,4 +28,21 @@ public class CidadeControle extends ConexaoPostgress {
         sql.append(cidade.getDescricao()).append("')");
         super.executeSQL(sql.toString());
     }
+    
+    public void alterar(CidadeModelo cidade) {
+        sql.delete(0, sql.length());
+        sql.append("UPDATE CADCIDADE SET ");
+        sql.append("DSCIDADE = '").append(cidade.getDescricao()).append("' ");
+        sql.append(" WHERE ");
+        sql.append("IDCIDADE = ").append(cidade.getIdcidade());
+        super.executeSQL(sql.toString());
+    }
+    
+    public void excluir(CidadeModelo cidade) {
+        sql.delete(0, sql.length());
+        sql.append("DELETE FROM CADCIDADE ");
+        sql.append(" WHERE ");
+        sql.append("IDCIDADE = ").append(cidade.getIdcidade());
+        super.executeSQL(sql.toString());
+    }
 }
