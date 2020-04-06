@@ -70,6 +70,21 @@ public class ConexaoPostgress {
         }
     }
 
+    public void atualizarSQL(String sql) {
+        try {
+            statement = ConexaoPostgress.createStatement(
+                    ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            retorno = 0;
+            retorno = statement.executeUpdate(sql);
+            if (retorno == 1) {
+                JOptionPane.showMessageDialog(null, "Operação realizada com sucesso");
+            }
+        } catch (SQLException sqlex) {
+            JOptionPane.showMessageDialog(null, "Erro ao incluir ou alterar " + sqlex);
+            retorno = 0;
+        }
+    }
+
     public int ultimasequencia(String tabela, String atributo) {
         executeSQL("SELECT COALESCE(MAX(" + atributo + "),0) + 1 AS ULTIMO FROM "
                 + tabela);
@@ -84,33 +99,5 @@ public class ConexaoPostgress {
     }
 
     public static void main(String[] args) {
-        ConexaoPostgress conexao = new ConexaoPostgress();
-
-        conexao.executeSQL("SELECT COALESCE(MAX(idcidade),0) + 1 AS ULTIMO FROM CADCIDADE");
-
-        try {
-            resultset.first();
-            JOptionPane.showMessageDialog(null, resultset.getString("ultimo"));
-        } catch (SQLException ex) {
-            Logger.getLogger(ConexaoPostgress.class.getName()).log(Level.SEVERE, null, ex);
-        }
-//        String sql = "SELECT * FROM CADCIDADE";
-//
-//        conexao.executeSQL(sql);
-
-//        try {
-//            while (resultset.next()) {
-//                JOptionPane.showMessageDialog(null, resultset.getString("dscidade"));
-//            }
-//        } catch (SQLException erro) {
-//            JOptionPane.showMessageDialog(null, "Erro ao listar no JTable " + erro);
-//        }
-//        try {
-//            conexao.resultset.first();
-//            String teste = resultset.getString("dscidade");
-//            JOptionPane.showMessageDialog(null, resultset.getString("dscidade"));
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, ex);
-//        }
     }
 }
