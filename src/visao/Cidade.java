@@ -41,7 +41,7 @@ public class Cidade extends javax.swing.JFrame {
         jPConsulta = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTbConsulta = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
+        jbPesquisa = new javax.swing.JButton();
         jCbTipo = new javax.swing.JComboBox();
         jTFConsulta = new javax.swing.JTextField();
 
@@ -167,10 +167,10 @@ public class Cidade extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTbConsulta);
 
-        jButton2.setText("Pesquisar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jbPesquisa.setText("Pesquisar");
+        jbPesquisa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jbPesquisaActionPerformed(evt);
             }
         });
 
@@ -189,18 +189,18 @@ public class Cidade extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTFConsulta)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)))
+                        .addComponent(jbPesquisa)))
                 .addContainerGap())
         );
         jPConsultaLayout.setVerticalGroup(
             jPConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPConsultaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
+                .addGroup(jPConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jCbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTFConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTFConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbPesquisa))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
                 .addContainerGap())
@@ -223,34 +223,34 @@ public class Cidade extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jbPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPesquisaActionPerformed
         preencher.FormatarJtable(jTbConsulta, new int[]{150, 500});
 
         switch (jCbTipo.getSelectedIndex()) {
             case 0: {
                 preencher.PreencherJtableGenerico(jTbConsulta,
-                        new String[]{"IDCIDADE", "DS_CIDADE"},
+                        new String[]{"IDCIDADE", "DSCIDADE"},
                         daocidade.consultageral());
                 break;
             }
             case 1: {
                 modcidade.setIdcidade(Integer.parseInt(jTFConsulta.getText()));
                 preencher.PreencherJtableGenerico(jTbConsulta,
-                        new String[]{"CD_CIDADE", "DS_CIDADE", "DS_UF"},
+                        new String[]{"IDCIDADE", "DSCIDADE"},
                         daocidade.consultacodigo(modcidade));
                 break;
             }
             case 2: {
                 modcidade.setDescricao(jTFConsulta.getText());
                 preencher.PreencherJtableGenerico(jTbConsulta,
-                        new String[]{"CD_CIDADE", "DS_CIDADE", "DS_UF"},
+                        new String[]{"IDCIDADE", "DSCIDADE"},
                         daocidade.consultadescricao(modcidade));
                 break;
             }
         }
 
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jbPesquisaActionPerformed
 
     private void jBtNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtNovoActionPerformed
         estado = Rotinas.INCLUIR;
@@ -346,7 +346,6 @@ public class Cidade extends javax.swing.JFrame {
     private javax.swing.JButton jBtExcluir;
     private javax.swing.JButton jBtGravar;
     private javax.swing.JButton jBtNovo;
-    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox jCbTipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -358,6 +357,7 @@ public class Cidade extends javax.swing.JFrame {
     private javax.swing.JTextField jTFId;
     private javax.swing.JTable jTbConsulta;
     private javax.swing.JTabbedPane jTbPainel;
+    private javax.swing.JButton jbPesquisa;
     // End of variables declaration//GEN-END:variables
 
     public void estadobotoes(int situacao) { // 0 - normal, 1 inclusao

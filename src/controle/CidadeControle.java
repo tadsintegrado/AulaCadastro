@@ -19,17 +19,20 @@ public class CidadeControle extends ConexaoPostgress {
     }
 
     public ResultSet consultadescricao(CidadeModelo cidade) {
-        super.executeSQL("SELECT * FROM CAD_CIDADE WHERE "
-                + " DS_CIDADE LIKE '%" + cidade.getDescricao()
+        super.executeSQL("SELECT * FROM CADCIDADE WHERE "
+                + " DSCIDADE LIKE '%" + cidade.getDescricao()
                 + "%'");
         return super.resultset;
     }
 
     public ResultSet consultacodigo(CidadeModelo cidade) {
-        super.executeSQL("SELECT * FROM CAD_CIDADE WHERE "
-                + " CD_CIDADE = " + cidade.getIdcidade());
+        super.executeSQL("SELECT * FROM CADCIDADE WHERE "
+                + " IDCIDADE = " + cidade.getIdcidade());
         return super.resultset;
     }
+    
+    
+    
 
     public void incluir(CidadeModelo cidade) {
         cidade.setIdcidade(super.ultimasequencia("cadcidade", "idcidade"));
