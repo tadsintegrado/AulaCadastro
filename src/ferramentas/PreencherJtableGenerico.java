@@ -2,6 +2,7 @@ package ferramentas;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -43,5 +44,26 @@ public class PreencherJtableGenerico {
         model.setNumRows(0);   
     }
 
+    
+     public String[] preencherComboStr(JComboBox combo, ResultSet resultado, String[] pk,
+            String conteudo, String chave) {
+        combo.removeAllItems();
+        try {
+            resultado.last();
+            pk = new String[resultado.getRow()];
+
+            resultado.first();
+            int i = 0;
+            do {
+                combo.addItem(resultado.getString(conteudo));
+                pk[i] = resultado.getString(chave);
+                i++;
+            } while (resultado.next());
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+        return pk;
+    }
 }
 

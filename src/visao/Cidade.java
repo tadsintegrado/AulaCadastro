@@ -1,10 +1,12 @@
 package visao;
 
 import controle.CidadeControle;
+import controle.UFControle;
 import ferramentas.PreencherJtableGenerico;
 import ferramentas.Rotinas;
 import javax.swing.JOptionPane;
 import modelo.CidadeModelo;
+import modelo.UFModelo;
 
 /**
  *
@@ -15,12 +17,20 @@ public class Cidade extends javax.swing.JFrame {
     private CidadeControle daocidade = new CidadeControle();
     private CidadeModelo modcidade = new CidadeModelo();
 
+    private UFControle controleuf = new UFControle();
+    private UFModelo modelouf = new UFModelo();
+    private String[] codestado = null;
+    
     private PreencherJtableGenerico preencher = new PreencherJtableGenerico();
     private int estado;
 
+    
+    
     public Cidade() {
         initComponents();
         estadobotoes(0);
+        codestado = preencher.preencherComboStr(jCBUF, controleuf.consultageral(), codestado,
+                "dsuf", "iduf");
     }
 
     @SuppressWarnings("unchecked")
@@ -38,6 +48,9 @@ public class Cidade extends javax.swing.JFrame {
         jBtExcluir = new javax.swing.JButton();
         jBtGravar = new javax.swing.JButton();
         jBtCancelar = new javax.swing.JButton();
+        jTFCodUf = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jCBUF = new javax.swing.JComboBox();
         jPConsulta = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTbConsulta = new javax.swing.JTable();
@@ -93,28 +106,49 @@ public class Cidade extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setText("Unidade Federativa");
+
+        jCBUF.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCBUF.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                jCBUFPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
+
         javax.swing.GroupLayout jPCadastroLayout = new javax.swing.GroupLayout(jPCadastro);
         jPCadastro.setLayout(jPCadastroLayout);
         jPCadastroLayout.setHorizontalGroup(
             jPCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPCadastroLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addGroup(jPCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1)
-                    .addGroup(jPCadastroLayout.createSequentialGroup()
-                        .addComponent(jBtNovo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(jBtAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
-                        .addComponent(jBtExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(jBtGravar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addComponent(jBtCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTFCidade)
-                    .addComponent(jTFId, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                    .addGroup(jPCadastroLayout.createSequentialGroup()
+                        .addComponent(jTFCodUf, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCBUF, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPCadastroLayout.createSequentialGroup()
+                        .addGroup(jPCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1)
+                            .addGroup(jPCadastroLayout.createSequentialGroup()
+                                .addComponent(jBtNovo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27)
+                                .addComponent(jBtAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(34, 34, 34)
+                                .addComponent(jBtExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27)
+                                .addComponent(jBtGravar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(32, 32, 32)
+                                .addComponent(jBtCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTFId, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPCadastroLayout.setVerticalGroup(
             jPCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,7 +161,13 @@ public class Cidade extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTFCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTFCodUf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCBUF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(jPCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jBtNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -309,6 +349,13 @@ public class Cidade extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTbConsultaMouseClicked
 
+    private void jCBUFPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jCBUFPopupMenuWillBecomeInvisible
+    
+        int linha = jCBUF.getSelectedIndex();
+        jTFCodUf.setText(codestado[linha]);
+       
+    }//GEN-LAST:event_jCBUFPopupMenuWillBecomeInvisible
+
     /**
      * @param args the command line arguments
      */
@@ -346,13 +393,16 @@ public class Cidade extends javax.swing.JFrame {
     private javax.swing.JButton jBtExcluir;
     private javax.swing.JButton jBtGravar;
     private javax.swing.JButton jBtNovo;
+    private javax.swing.JComboBox jCBUF;
     private javax.swing.JComboBox jCbTipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPCadastro;
     private javax.swing.JPanel jPConsulta;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTFCidade;
+    private javax.swing.JTextField jTFCodUf;
     private javax.swing.JTextField jTFConsulta;
     private javax.swing.JTextField jTFId;
     private javax.swing.JTable jTbConsulta;
