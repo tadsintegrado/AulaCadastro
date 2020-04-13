@@ -13,6 +13,7 @@ public class CidadeControle extends ConexaoPostgress {
 
     private StringBuilder sql = new StringBuilder();
 
+    
     public ResultSet consultageral() {
         super.executeSQL("SELECT * FROM CADCIDADE");
         return super.resultset;
