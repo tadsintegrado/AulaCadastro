@@ -19,6 +19,7 @@ public class Cidade extends javax.swing.JFrame {
 
     private UFControle controleuf = new UFControle();
     private UFModelo modelouf = new UFModelo();
+    
     private String[] codestado = null;
     
     private PreencherJtableGenerico preencher = new PreencherJtableGenerico();
@@ -352,6 +353,7 @@ public class Cidade extends javax.swing.JFrame {
     private void jCBUFPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jCBUFPopupMenuWillBecomeInvisible
     
         int linha = jCBUF.getSelectedIndex();
+ 
         jTFCodUf.setText(codestado[linha]);
        
     }//GEN-LAST:event_jCBUFPopupMenuWillBecomeInvisible

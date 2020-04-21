@@ -4,7 +4,6 @@ import dao.ConexaoPostgress;
 import static dao.ConexaoPostgress.resultset;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import modelo.CidadeModelo;
 import modelo.UFModelo;
 
 /**
