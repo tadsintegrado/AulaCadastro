@@ -2,6 +2,7 @@ package visao;
 
 import controle.CidadeControle;
 import controle.UFControle;
+import ferramentas.LimparCampos;
 import ferramentas.PreencherJtableGenerico;
 import ferramentas.Rotinas;
 import javax.swing.JOptionPane;
@@ -23,6 +24,7 @@ public class Cidade extends javax.swing.JFrame {
     private String[] codestado = null;
     
     private PreencherJtableGenerico preencher = new PreencherJtableGenerico();
+    LimparCampos limpar = new LimparCampos();
     private int estado;
 
     
@@ -294,6 +296,7 @@ public class Cidade extends javax.swing.JFrame {
     }//GEN-LAST:event_jbPesquisaActionPerformed
 
     private void jBtNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtNovoActionPerformed
+        limpar.LimparCampos(jPCadastro);
         estado = Rotinas.INCLUIR;
         estadobotoes(1);
     }//GEN-LAST:event_jBtNovoActionPerformed
