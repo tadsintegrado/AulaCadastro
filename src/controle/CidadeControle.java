@@ -40,17 +40,20 @@ public class CidadeControle extends ConexaoPostgress {
         sql.delete(0, sql.length());
         sql.append("INSERT INTO CADCIDADE (");
         sql.append("IDCIDADE,");
-        sql.append("DSCIDADE");
+        sql.append("DSCIDADE,");
+        sql.append("IDUF");
         sql.append(") VALUES (");
         sql.append(cidade.getIdcidade()).append(",'");
-        sql.append(cidade.getDescricao()).append("')");
+        sql.append(cidade.getDescricao()).append("','");
+        sql.append(cidade.getIduf()).append("')");
         super.atualizarSQL(sql.toString());
     }
 
     public void alterar(CidadeModelo cidade) {
         sql.delete(0, sql.length());
         sql.append("UPDATE CADCIDADE SET ");
-        sql.append("DSCIDADE = '").append(cidade.getDescricao()).append("' ");
+        sql.append("DSCIDADE = '").append(cidade.getDescricao()).append("', ");
+        sql.append("IDUF = '").append(cidade.getIduf()).append("' ");
         sql.append(" WHERE ");
         sql.append("IDCIDADE = ").append(cidade.getIdcidade());
         super.atualizarSQL(sql.toString());
@@ -71,6 +74,7 @@ public class CidadeControle extends ConexaoPostgress {
             super.resultset.first();
             cidade.setIdcidade(resultset.getInt("idcidade"));
             cidade.setDescricao(resultset.getString("dscidade"));
+            cidade.setIduf(resultset.getString("iduf"));
         } catch (SQLException ex) {
             System.out.println(ex);
         }

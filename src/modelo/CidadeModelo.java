@@ -9,6 +9,7 @@ public class CidadeModelo {
 
     private int idcidade;
     private String descricao;
+    private String iduf;
     
     
     public int getIdcidade() {
@@ -27,6 +28,15 @@ public class CidadeModelo {
         this.descricao = descricao;
     }
 
+    public String getIduf() {
+        return iduf;
+    }
+
+    public void setIduf(String iduf) {
+        this.iduf = iduf;
+    }
+
+    
     
    
 

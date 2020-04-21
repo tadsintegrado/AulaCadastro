@@ -186,17 +186,17 @@ public class Cidade extends javax.swing.JFrame {
         jTbConsulta.setBorder(new javax.swing.border.MatteBorder(null));
         jTbConsulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Código", "Cidade"
+                "Código", "Cidade", "UF"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -267,26 +267,26 @@ public class Cidade extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPesquisaActionPerformed
-        preencher.FormatarJtable(jTbConsulta, new int[]{150, 500});
+        preencher.FormatarJtable(jTbConsulta, new int[]{150, 500, 100});
 
         switch (jCbTipo.getSelectedIndex()) {
             case 0: {
                 preencher.PreencherJtableGenerico(jTbConsulta,
-                        new String[]{"IDCIDADE", "DSCIDADE"},
+                        new String[]{"IDCIDADE", "DSCIDADE", "IDUF"},
                         daocidade.consultageral());
                 break;
             }
             case 1: {
                 modcidade.setIdcidade(Integer.parseInt(jTFConsulta.getText()));
                 preencher.PreencherJtableGenerico(jTbConsulta,
-                        new String[]{"IDCIDADE", "DSCIDADE"},
+                        new String[]{"IDCIDADE", "DSCIDADE", "IDUF"},
                         daocidade.consultacodigo(modcidade));
                 break;
             }
             case 2: {
                 modcidade.setDescricao(jTFConsulta.getText());
                 preencher.PreencherJtableGenerico(jTbConsulta,
-                        new String[]{"IDCIDADE", "DSCIDADE"},
+                        new String[]{"IDCIDADE", "DSCIDADE", "IDUF"},
                         daocidade.consultadescricao(modcidade));
                 break;
             }
@@ -436,11 +436,13 @@ public class Cidade extends javax.swing.JFrame {
             modcidade.setIdcidade(Integer.parseInt(jTFId.getText()));
         }
         modcidade.setDescricao(jTFCidade.getText());
+        modcidade.setIduf(jTFCodUf.getText());
     }
 
     public void getcomp() {
         jTFId.setText(Integer.toString(modcidade.getIdcidade()));
         jTFCidade.setText(modcidade.getDescricao());
+        jTFCodUf.setText(modcidade.getIduf());
     }
 
 }
