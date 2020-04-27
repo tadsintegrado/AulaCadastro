@@ -61,7 +61,7 @@ public class Cidade extends javax.swing.JFrame {
         jCbTipo = new javax.swing.JComboBox();
         jTFConsulta = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPCadastro.setName(""); // NOI18N
 
