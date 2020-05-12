@@ -2,10 +2,18 @@ package visao;
 
 import controle.CidadeControle;
 import controle.UFControle;
+import ferramentas.CaixaDialogo;
+import ferramentas.ExpotarExcel;
 import ferramentas.LimparCampos;
 import ferramentas.PreencherJtableGenerico;
 import ferramentas.Rotinas;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.TableModel;
 import modelo.CidadeModelo;
 import modelo.UFModelo;
 
@@ -20,15 +28,13 @@ public class Cidade extends javax.swing.JFrame {
 
     private UFControle controleuf = new UFControle();
     private UFModelo modelouf = new UFModelo();
-    
+
     private String[] codestado = null;
-    
+
     private PreencherJtableGenerico preencher = new PreencherJtableGenerico();
     LimparCampos limpar = new LimparCampos();
     private int estado;
 
-    
-    
     public Cidade() {
         initComponents();
         estadobotoes(0);
@@ -60,6 +66,7 @@ public class Cidade extends javax.swing.JFrame {
         jbPesquisa = new javax.swing.JButton();
         jCbTipo = new javax.swing.JComboBox();
         jTFConsulta = new javax.swing.JTextField();
+        jbPesquisa1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -219,6 +226,13 @@ public class Cidade extends javax.swing.JFrame {
 
         jCbTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Geral", "Código", "Descrição" }));
 
+        jbPesquisa1.setText("Exportar");
+        jbPesquisa1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbPesquisa1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPConsultaLayout = new javax.swing.GroupLayout(jPConsulta);
         jPConsulta.setLayout(jPConsultaLayout);
         jPConsultaLayout.setHorizontalGroup(
@@ -230,22 +244,25 @@ public class Cidade extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPConsultaLayout.createSequentialGroup()
                         .addComponent(jCbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTFConsulta)
+                        .addComponent(jTFConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jbPesquisa)))
+                        .addComponent(jbPesquisa)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbPesquisa1)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPConsultaLayout.setVerticalGroup(
             jPConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPConsultaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jCbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTFConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jbPesquisa))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+                .addGroup(jPConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTFConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbPesquisa)
+                    .addComponent(jbPesquisa1))
+                .addGap(8, 8, 8)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -354,12 +371,29 @@ public class Cidade extends javax.swing.JFrame {
     }//GEN-LAST:event_jTbConsultaMouseClicked
 
     private void jCBUFPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jCBUFPopupMenuWillBecomeInvisible
-    
+
         int linha = jCBUF.getSelectedIndex();
- 
+
         jTFCodUf.setText(codestado[linha]);
-       
+
     }//GEN-LAST:event_jCBUFPopupMenuWillBecomeInvisible
+
+    private void jbPesquisa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPesquisa1ActionPerformed
+
+       CaixaDialogo cd = new CaixaDialogo();
+        cd.CaixaDialogo();
+
+        ExpotarExcel ee = new ExpotarExcel();
+
+        try {
+            ee.exportTable(jTbConsulta, new File(cd.local));
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Problemas na geração do arquivo. " + ex);
+        }
+        
+       
+
+    }//GEN-LAST:event_jbPesquisa1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -413,6 +447,7 @@ public class Cidade extends javax.swing.JFrame {
     private javax.swing.JTable jTbConsulta;
     private javax.swing.JTabbedPane jTbPainel;
     private javax.swing.JButton jbPesquisa;
+    private javax.swing.JButton jbPesquisa1;
     // End of variables declaration//GEN-END:variables
 
     public void estadobotoes(int situacao) { // 0 - normal, 1 inclusao

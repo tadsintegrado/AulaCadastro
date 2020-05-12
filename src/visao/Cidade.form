@@ -235,9 +235,12 @@
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="jCbTipo" min="-2" pref="110" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jTFConsulta" max="32767" attributes="0"/>
+                              <Component id="jTFConsulta" min="-2" pref="256" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jbPesquisa" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jbPesquisa1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -248,15 +251,14 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                              <Component id="jCbTipo" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTFConsulta" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="jbPesquisa" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jCbTipo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTFConsulta" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jbPesquisa" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jbPesquisa1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" pref="201" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" pref="200" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -328,6 +330,14 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTFConsulta">
+            </Component>
+            <Component class="javax.swing.JButton" name="jbPesquisa1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Exportar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbPesquisa1ActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
