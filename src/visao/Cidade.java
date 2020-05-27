@@ -8,12 +8,7 @@ import ferramentas.LimparCampos;
 import ferramentas.PreencherJtableGenerico;
 import ferramentas.Rotinas;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.table.TableModel;
 import modelo.CidadeModelo;
 import modelo.UFModelo;
 
@@ -138,11 +133,11 @@ public class Cidade extends javax.swing.JFrame {
                 .addGroup(jPCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTFCidade)
                     .addGroup(jPCadastroLayout.createSequentialGroup()
-                        .addComponent(jTFCodUf, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCBUF, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPCadastroLayout.createSequentialGroup()
-                        .addGroup(jPCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPCadastroLayout.createSequentialGroup()
+                                .addComponent(jTFCodUf, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCBUF, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(jLabel2)
                             .addComponent(jLabel1)
                             .addGroup(jPCadastroLayout.createSequentialGroup()
@@ -157,8 +152,8 @@ public class Cidade extends javax.swing.JFrame {
                                 .addComponent(jBtCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jTFId, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 3, Short.MAX_VALUE)))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         jPCadastroLayout.setVerticalGroup(
             jPCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -261,9 +256,9 @@ public class Cidade extends javax.swing.JFrame {
                     .addComponent(jTFConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbPesquisa)
                     .addComponent(jbPesquisa1))
-                .addGap(8, 8, 8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(14, 14, 14))
         );
 
         jTbPainel.addTab("Consulta", jPConsulta);
@@ -381,7 +376,7 @@ public class Cidade extends javax.swing.JFrame {
     private void jbPesquisa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPesquisa1ActionPerformed
 
        CaixaDialogo cd = new CaixaDialogo();
-        cd.CaixaDialogo();
+       cd.CaixaDialogo();
 
         ExpotarExcel ee = new ExpotarExcel();
 

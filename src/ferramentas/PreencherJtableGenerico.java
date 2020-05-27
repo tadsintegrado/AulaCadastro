@@ -65,5 +65,27 @@ public class PreencherJtableGenerico {
         }
         return pk;
     }
+     
+     public int[] preencherComboInt(JComboBox combo, ResultSet resultado, int[] pk,
+            String conteudo, int chave) {
+        combo.removeAllItems();
+        try {
+            resultado.last();
+            pk = new int[resultado.getRow()];
+
+            resultado.first();
+            int i = 0;
+            do {
+                combo.addItem(resultado.getString(conteudo));
+                pk[i] = resultado.getInt(chave);
+                i++;
+            } while (resultado.next());
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+        return pk;
+    }
+     
 }
 
