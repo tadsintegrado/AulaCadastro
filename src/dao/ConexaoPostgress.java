@@ -29,7 +29,7 @@ public class ConexaoPostgress {
         } else {
             try {
                 Class.forName("org.postgresql.Driver");
-                ConexaoPostgress = DriverManager.getConnection("jdbc:postgresql://localhost:5432/AulaJava",
+                ConexaoPostgress = DriverManager.getConnection("jdbc:postgresql://localhost:5433/AulaJava",
                         "postgres", "acs1707$");
 
                 System.out.println("Conectado");
