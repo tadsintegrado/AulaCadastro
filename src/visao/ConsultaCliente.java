@@ -1,23 +1,27 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package visao;
+
+import controle.ClienteControle;
+import ferramentas.PreencherJtableGenerico;
+import modelo.ClienteModelo;
 
 /**
  *
  * @author acsantana
  */
-public class ConsultaCliente extends javax.swing.JFrame {
+public class ConsultaCliente extends javax.swing.JDialog {
 
-    /**
-     * Creates new form ConsultaCliente
-     */
-    public ConsultaCliente() {
+    PreencherJtableGenerico preencher = new PreencherJtableGenerico();
+
+    private ClienteControle controlecliente = new ClienteControle();
+    private ClienteModelo modcliente = new ClienteModelo();
+
+    public String codRetorno = "";
+    public String descRetorno = "";
+
+    public ConsultaCliente(java.awt.Frame parent, boolean modal) {
         initComponents();
+        preencher.FormatarJtable(jTbConsulta, new int[]{80, 250});
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -78,6 +82,11 @@ public class ConsultaCliente extends javax.swing.JFrame {
         });
 
         jButton2.setText("Selecionar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -125,28 +134,38 @@ public class ConsultaCliente extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTbConsultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbConsultaMouseClicked
-
-    }//GEN-LAST:event_jTbConsultaMouseClicked
-
     private void jbPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPesquisaActionPerformed
-       
+        preencher.PreencherJtableGenerico(jTbConsulta,
+                new String[]{"IDPESSOA", "DSPESSOA"},
+                controlecliente.consultageral());
 
     }//GEN-LAST:event_jbPesquisaActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        codRetorno = "";
+        descRetorno = "";
+        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTbConsultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbConsultaMouseClicked
+        int index = jTbConsulta.getSelectedRow(); //Retorna o índice da linha
+        codRetorno = (String) jTbConsulta.getValueAt(index, 0);
+        descRetorno = (String) jTbConsulta.getValueAt(index, 1);
+        
+        if (evt.getClickCount() == 2){
+            dispose();
+        }
+        
+    }//GEN-LAST:event_jTbConsultaMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Windows".equals(info.getName())) {
@@ -167,8 +186,16 @@ public class ConsultaCliente extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             public void run() {
-                new ConsultaCliente().setVisible(true);
+                ConsultaCliente dialog = new ConsultaCliente(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }
