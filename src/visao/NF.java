@@ -1,13 +1,17 @@
 package visao;
 
+import controle.ClienteControle;
 import controle.ItensNFControle;
 import controle.NFControle;
+import controle.ProdutoControle;
 import ferramentas.PreencherJtableGenerico;
-import java.util.Arrays;
+import ferramentas.RetornaDescricao;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modelo.ClienteModelo;
 import modelo.ItensNFModelo;
 import modelo.NFModelo;
+import modelo.ProdutoModelo;
 
 /**
  *
@@ -21,8 +25,19 @@ public class NF extends javax.swing.JFrame {
     private ItensNFControle controleitensnf = new ItensNFControle();
     private ItensNFModelo modeloitensnf = new ItensNFModelo();
 
+    private ClienteModelo modelocliente = new ClienteModelo();
+    private ClienteControle controlecliente = new ClienteControle();
+
+    private ProdutoModelo modeloproduto = new ProdutoModelo();
+    private ProdutoControle controleproduto = new ProdutoControle();
+
+    private RetornaDescricao retornadescricao = new RetornaDescricao();
+
     private PreencherJtableGenerico preencher = new PreencherJtableGenerico();
 
+    private int estoque;
+    
+    
     public NF() {
         initComponents();
     }
@@ -81,6 +96,11 @@ public class NF extends javax.swing.JFrame {
         jTFIdNF.setBackground(new java.awt.Color(204, 204, 204));
 
         jTFIdClietne.setBackground(new java.awt.Color(153, 255, 255));
+        jTFIdClietne.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTFIdClietneFocusLost(evt);
+            }
+        });
         jTFIdClietne.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTFIdClietneMouseClicked(evt);
@@ -127,12 +147,29 @@ public class NF extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTbIncluir);
 
         jTFIdProduto.setBackground(new java.awt.Color(153, 255, 255));
+        jTFIdProduto.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTFIdProdutoFocusLost(evt);
+            }
+        });
 
         jLabel4.setText("Código Produto");
 
         jLabel5.setText("Produto");
 
+        jTFQtde.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTFQtdeFocusLost(evt);
+            }
+        });
+
         jLabel6.setText("Qtde");
+
+        jTFValor.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTFValorFocusLost(evt);
+            }
+        });
 
         jLabel7.setText("Cliente");
 
@@ -450,27 +487,31 @@ public class NF extends javax.swing.JFrame {
     }//GEN-LAST:event_jTbConsultaMouseClicked
 
     private void jTFIdClietneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFIdClietneMouseClicked
-        final ConsultaCliente cc = new ConsultaCliente(this, true);
-        cc.setVisible(true);
-        cc.addWindowListener(new java.awt.event.WindowAdapter() {
 
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                jTFIdClietne.setText(cc.codRetorno);
-                jTFDescCliente.setText(cc.descRetorno);
-            }
-        });
+        if (evt.getClickCount() == 2) {
+
+            final ConsultaCliente cc = new ConsultaCliente(this, true);
+            cc.setVisible(true);
+            cc.addWindowListener(new java.awt.event.WindowAdapter() {
+
+                public void windowClosed(java.awt.event.WindowEvent evt) {
+                    jTFIdClietne.setText(cc.codRetorno);
+                    jTFDescCliente.setText(cc.descRetorno);
+                }
+            });
+        }
     }//GEN-LAST:event_jTFIdClietneMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Object[] linha = new Object[]{false, jTFIdProduto.getText(), jTFDescProduto.getText().toString(),
-        jTFQtde.getText(),jTFValor.getText(),jTFTotItem.getText()};
+            jTFQtde.getText(), jTFValor.getText(), jTFTotItem.getText()};
 
         DefaultTableModel modelo = (DefaultTableModel) jTbIncluir.getModel();
         modelo.addRow(linha);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-         DefaultTableModel tabela = (DefaultTableModel) jTbIncluir.getModel();
+        DefaultTableModel tabela = (DefaultTableModel) jTbIncluir.getModel();
         int totlinha = jTbIncluir.getRowCount();
         int i = 0;
         Boolean sel = false;
@@ -491,6 +532,44 @@ public class NF extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTFIdClietneFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFIdClietneFocusLost
+
+        modelocliente.setIdpessoa(Integer.parseInt(jTFIdClietne.getText()));
+        retornadescricao.retornadescricao(controlecliente.consultacodigo(modelocliente), 
+                jTFDescCliente, "DSPESSOA");
+
+
+    }//GEN-LAST:event_jTFIdClietneFocusLost
+
+    private void jTFIdProdutoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFIdProdutoFocusLost
+        modeloproduto.setIdproduto(Integer.parseInt(jTFIdProduto.getText()));
+        controleproduto.retornadados(modeloproduto);
+        
+        jTFDescProduto.setText(modeloproduto.getDsproduto());
+        jTFValor.setText(Double.toString(modeloproduto.getVlvenda()));
+        estoque = modeloproduto.getQtestoque();
+        
+    }//GEN-LAST:event_jTFIdProdutoFocusLost
+
+    private void jTFValorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFValorFocusLost
+        int quantidade = Integer.parseInt(jTFQtde.getText());
+        double valor = Double.parseDouble(jTFValor.getText());
+        
+        jTFTotItem.setText(Double.toString(quantidade * valor));
+        
+        
+    }//GEN-LAST:event_jTFValorFocusLost
+
+    private void jTFQtdeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFQtdeFocusLost
+        int qtdvenda = Integer.parseInt(jTFQtde.getText());
+        
+        if (qtdvenda > estoque){
+            JOptionPane.showMessageDialog(null, "Quantidade de estoque insuficiente \n" + "Qtde Estoque :" + estoque);
+            jTFQtde.setText("");
+            jTFTotItem.setText("");
+        }
+    }//GEN-LAST:event_jTFQtdeFocusLost
 
     public static void main(String args[]) {
         try {

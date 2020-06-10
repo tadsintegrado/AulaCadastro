@@ -2,6 +2,7 @@ package controle;
 
 import dao.ConexaoPostgress;
 import java.sql.ResultSet;
+import modelo.ClienteModelo;
 
 
 /**
@@ -17,4 +18,9 @@ public class ClienteControle extends ConexaoPostgress {
         return super.resultset;
     }
 
+     public ResultSet consultacodigo(ClienteModelo cliente) {
+        super.executeSQL("SELECT * FROM CADPESSOA WHERE "
+                + " IDPESSOA = " + cliente.getIdpessoa());
+        return super.resultset;
+    } 
 }
