@@ -46,6 +46,19 @@ public class NF extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPMConsulta = new javax.swing.JPopupMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        GrupoParcelas = new javax.swing.ButtonGroup();
+        jPMParcelas = new javax.swing.JPopupMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
         jTPNF = new javax.swing.JTabbedPane();
         jPNF = new javax.swing.JPanel();
         jTFIdNF = new javax.swing.JTextField();
@@ -76,6 +89,9 @@ public class NF extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
         jTFDescCliente = new javax.swing.JTextField();
         jTFDescProduto = new javax.swing.JTextField();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jRadioButton3 = new javax.swing.JRadioButton();
         jPConsulta = new javax.swing.JPanel();
         jTFPesquisa = new javax.swing.JTextField();
         jCBTipo = new javax.swing.JComboBox<>();
@@ -88,6 +104,33 @@ public class NF extends javax.swing.JFrame {
         jTbConsulta = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTBConsultaItens = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTBConsultaItens1 = new javax.swing.JTable();
+
+        jMenuItem1.setText("Selecionar");
+        jPMConsulta.add(jMenuItem1);
+
+        jMenuItem2.setText("Remover");
+        jPMConsulta.add(jMenuItem2);
+
+        jMenuItem3.setText("jMenuItem3");
+        jPopupMenu1.add(jMenuItem3);
+
+        jMenuItem4.setText("jMenuItem4");
+        jPopupMenu1.add(jMenuItem4);
+        jPopupMenu1.add(jSeparator2);
+
+        jMenuItem5.setText("jMenuItem5");
+        jPopupMenu1.add(jMenuItem5);
+
+        jMenuItem6.setText("Pagar");
+        jPMParcelas.add(jMenuItem6);
+
+        jMenuItem7.setText("Pagar Total");
+        jPMParcelas.add(jMenuItem7);
+
+        jMenuItem8.setText("Retornar Pagamento");
+        jPMParcelas.add(jMenuItem8);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Lançamento de Nota Fiscal");
@@ -209,6 +252,15 @@ public class NF extends javax.swing.JFrame {
         jTFDescCliente.setEditable(false);
         jTFDescCliente.setBackground(new java.awt.Color(204, 204, 204));
 
+        GrupoParcelas.add(jRadioButton1);
+        jRadioButton1.setText("A Vista");
+
+        GrupoParcelas.add(jRadioButton2);
+        jRadioButton2.setText("3x");
+
+        GrupoParcelas.add(jRadioButton3);
+        jRadioButton3.setText("6x");
+
         javax.swing.GroupLayout jPNFLayout = new javax.swing.GroupLayout(jPNF);
         jPNF.setLayout(jPNFLayout);
         jPNFLayout.setHorizontalGroup(
@@ -234,40 +286,51 @@ public class NF extends javax.swing.JFrame {
                                 .addComponent(jLabel7)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(jTFDescCliente)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 678, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jSeparator1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPNFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel2)
-                        .addGroup(jPNFLayout.createSequentialGroup()
-                            .addGroup(jPNFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel1)
-                                .addComponent(jTFIdNF, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPNFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTFVlTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel3)))
-                        .addGroup(jPNFLayout.createSequentialGroup()
-                            .addGroup(jPNFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel4)
-                                .addComponent(jTFIdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPNFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel5)
-                                .addComponent(jTFDescProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPNFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTFQtde, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel6))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPNFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTFValor)
-                                .addComponent(jLabel8)
-                                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPNFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel9)
-                                .addComponent(jTFTotItem, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
-                                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPNFLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPNFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addGroup(jPNFLayout.createSequentialGroup()
+                                .addGroup(jPNFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jTFIdNF, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPNFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTFVlTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3)))
+                            .addGroup(jPNFLayout.createSequentialGroup()
+                                .addGroup(jPNFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jTFIdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPNFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jTFDescProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPNFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTFQtde, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPNFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTFValor)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPNFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jTFTotItem, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
+                                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                    .addGroup(jPNFLayout.createSequentialGroup()
+                        .addGroup(jPNFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 678, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPNFLayout.createSequentialGroup()
+                                .addComponent(jRadioButton1)
+                                .addGap(10, 10, 10)
+                                .addComponent(jRadioButton2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jRadioButton3)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPNFLayout.setVerticalGroup(
@@ -289,8 +352,15 @@ public class NF extends javax.swing.JFrame {
                 .addGroup(jPNFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTFIdClietne, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTFDescCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addGroup(jPNFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPNFLayout.createSequentialGroup()
+                        .addComponent(jRadioButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPNFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jRadioButton2)
+                        .addComponent(jRadioButton3)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPNFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -310,7 +380,7 @@ public class NF extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addComponent(jButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPNFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPNFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -357,6 +427,8 @@ public class NF extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTbConsulta.setToolTipText("");
+        jTbConsulta.setComponentPopupMenu(jPMConsulta);
         jTbConsulta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTbConsultaMouseClicked(evt);
@@ -372,7 +444,34 @@ public class NF extends javax.swing.JFrame {
                 "NF", "Cód. Produto", "Produto", "Qtde", "VL. Unit.", "Vl. Total"
             }
         ));
+        jTBConsultaItens.setComponentPopupMenu(jPopupMenu1);
         jScrollPane3.setViewportView(jTBConsultaItens);
+
+        jTBConsultaItens1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Sel.", "NF", "Nr. Parcela", "Valor Parcela", "Valor Pago"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                true, false, false, false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTBConsultaItens1.setComponentPopupMenu(jPMParcelas);
+        jScrollPane4.setViewportView(jTBConsultaItens1);
 
         javax.swing.GroupLayout jPConsultaLayout = new javax.swing.GroupLayout(jPConsulta);
         jPConsulta.setLayout(jPConsultaLayout);
@@ -399,9 +498,10 @@ public class NF extends javax.swing.JFrame {
                                 .addComponent(jLabel11)
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPConsultaLayout.createSequentialGroup()
-                        .addGroup(jPConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 683, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2))
+                        .addGroup(jPConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 683, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 683, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 683, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -420,10 +520,12 @@ public class NF extends javax.swing.JFrame {
                     .addComponent(jCBFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton9))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTPNF.addTab("Consulta", jPConsulta);
@@ -513,7 +615,8 @@ public class NF extends javax.swing.JFrame {
 
         DefaultTableModel modelo = (DefaultTableModel) jTbIncluir.getModel();
         modelo.addRow(linha);
-        somatotal();
+        //somatotal();
+        preencher.somaitens(jTbIncluir, jTFVlTotal, 5);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -537,7 +640,8 @@ public class NF extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Nao ha nenhum registro selecionado !");
             }
         }
-        somatotal();
+        //somatotal();
+        preencher.somaitens(jTbIncluir, jTFVlTotal, 5);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTFIdClietneFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFIdClietneFocusLost
@@ -584,7 +688,7 @@ public class NF extends javax.swing.JFrame {
         modnf.setVltotal(Double.parseDouble(jTFVlTotal.getText()));
         controlenf.incluir(modnf);
         jTFIdNF.setText(Integer.toString(modnf.getIdnf()));
-        
+
         incluirprodutos();
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -616,6 +720,7 @@ public class NF extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup GrupoParcelas;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -638,13 +743,30 @@ public class NF extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JPanel jPConsulta;
+    private javax.swing.JPopupMenu jPMConsulta;
+    private javax.swing.JPopupMenu jPMParcelas;
     private javax.swing.JPanel jPNF;
+    private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JTable jTBConsultaItens;
+    private javax.swing.JTable jTBConsultaItens1;
     private javax.swing.JTextField jTFDescCliente;
     private javax.swing.JTextField jTFDescProduto;
     private javax.swing.JTextField jTFIdClietne;

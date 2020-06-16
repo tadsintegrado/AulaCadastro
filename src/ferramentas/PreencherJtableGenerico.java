@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -12,13 +13,25 @@ import javax.swing.table.DefaultTableModel;
  * @author acsantana
  */
 public class PreencherJtableGenerico {
-    
-    public void FormatarJtable(JTable tabela, int valores[]) {
-            for (int x = 0; x < valores.length; x++) {
-                tabela.getColumnModel().getColumn(x).setPreferredWidth(valores[x]);
-            }
+
+    public void somaitens(JTable tabela, JTextField campo, int coluna) {
+        DefaultTableModel Tabela = (DefaultTableModel) tabela.getModel();
+        int totlinha = Tabela.getRowCount();
+        double total = 0;
+        for (int i = 0; i < totlinha; i++) {
+            String vl = ((String) Tabela.getValueAt(i, coluna));
+            total = total + (Double.parseDouble(vl));
+        }
+        campo.setText(Double.toString(total));
+
     }
-    
+
+    public void FormatarJtable(JTable tabela, int valores[]) {
+        for (int x = 0; x < valores.length; x++) {
+            tabela.getColumnModel().getColumn(x).setPreferredWidth(valores[x]);
+        }
+    }
+
     public void PreencherJtableGenerico(JTable tabela, String campos[], ResultSet resultSet) {
         DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
         modelo.setNumRows(0);
@@ -36,21 +49,20 @@ public class PreencherJtableGenerico {
         }
     }
 
-    
-  public void PreencherJtableGenericoSel(JTable tabela, String campos[], ResultSet resultSet) {
+    public void PreencherJtableGenericoSel(JTable tabela, String campos[], ResultSet resultSet) {
         DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
         modelo.setNumRows(0);
-        
+
         try {
             while (resultSet.next()) {
                 int len = campos.length;
                 Object[] row = new Object[len];
                 for (int i = 0; i < len; i++) {
-                    
+
                     if (i == 0) {
                         row[i] = (false);
                     } else {
-                       row[i] = resultSet.getString(campos[i]);
+                        row[i] = resultSet.getString(campos[i]);
                     }
                 }
                 modelo.addRow(row);
@@ -60,25 +72,12 @@ public class PreencherJtableGenerico {
         }
     }
 
-
- 
-
-
-
-
-
-
-
-
-
-
     public void limparJtable(JTable table) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
-        model.setNumRows(0);   
+        model.setNumRows(0);
     }
 
-    
-     public String[] preencherComboStr(JComboBox combo, ResultSet resultado, String[] pk,
+    public String[] preencherComboStr(JComboBox combo, ResultSet resultado, String[] pk,
             String conteudo, String chave) {
         combo.removeAllItems();
         try {
@@ -98,8 +97,8 @@ public class PreencherJtableGenerico {
         }
         return pk;
     }
-     
-     public int[] preencherComboInt(JComboBox combo, ResultSet resultado, int[] pk,
+
+    public int[] preencherComboInt(JComboBox combo, ResultSet resultado, int[] pk,
             String conteudo, int chave) {
         combo.removeAllItems();
         try {
@@ -119,6 +118,5 @@ public class PreencherJtableGenerico {
         }
         return pk;
     }
-     
-}
 
+}
