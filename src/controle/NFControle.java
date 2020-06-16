@@ -30,5 +30,18 @@ public class NFControle extends ConexaoPostgress {
                 + " IDNF = " + nf.getIdnf());
         return super.resultset;
     }
-
+    
+     public void incluir(NFModelo nf) {
+        nf.setIdnf(super.ultimasequencia("nf", "idnf"));
+        sql.delete(0, sql.length());
+        sql.append("INSERT INTO NF (");
+        sql.append("IDNF,");
+        sql.append("IDCLIENTE,");
+        sql.append("VLTOTAL");
+        sql.append(") VALUES (");
+        sql.append(nf.getIdnf()).append(",");
+        sql.append(nf.getIdcliente()).append(",");
+        sql.append(nf.getVltotal()).append(")");
+        super.atualizarSQL(sql.toString());
+    }
 }

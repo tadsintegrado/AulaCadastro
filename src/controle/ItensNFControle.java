@@ -23,4 +23,20 @@ public class ItensNFControle extends ConexaoPostgress {
         return super.resultset;
     }
 
+     public void incluir(ItensNFModelo itens) {
+        sql.delete(0, sql.length());
+        sql.append("INSERT INTO ITENSDANF (");
+        sql.append("IDNF,");
+        sql.append("IDPRODUTO,");
+        sql.append("VLPRODUTO,");
+        sql.append("QTDPRODUTO");
+        sql.append(") VALUES (");
+        sql.append(itens.getIdnf()).append(",");
+        sql.append(itens.getIdproduto()).append(",");
+        sql.append(itens.getVlproduto()).append(",");
+        sql.append(itens.getQtdproduto()).append(")");
+        super.atualizarSQL(sql.toString());
+    }
+    
+    
 }

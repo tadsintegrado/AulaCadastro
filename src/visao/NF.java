@@ -36,10 +36,10 @@ public class NF extends javax.swing.JFrame {
     private PreencherJtableGenerico preencher = new PreencherJtableGenerico();
 
     private int estoque;
-    
-    
+
     public NF() {
         initComponents();
+
     }
 
     @SuppressWarnings("unchecked")
@@ -198,6 +198,11 @@ public class NF extends javax.swing.JFrame {
         jButton5.setText("Excluir");
 
         jButton6.setText("Gravar");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jButton7.setText("Cancelar");
 
@@ -508,6 +513,7 @@ public class NF extends javax.swing.JFrame {
 
         DefaultTableModel modelo = (DefaultTableModel) jTbIncluir.getModel();
         modelo.addRow(linha);
+        somatotal();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -531,12 +537,13 @@ public class NF extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Nao ha nenhum registro selecionado !");
             }
         }
+        somatotal();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTFIdClietneFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFIdClietneFocusLost
 
         modelocliente.setIdpessoa(Integer.parseInt(jTFIdClietne.getText()));
-        retornadescricao.retornadescricao(controlecliente.consultacodigo(modelocliente), 
+        retornadescricao.retornadescricao(controlecliente.consultacodigo(modelocliente),
                 jTFDescCliente, "DSPESSOA");
 
 
@@ -545,31 +552,41 @@ public class NF extends javax.swing.JFrame {
     private void jTFIdProdutoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFIdProdutoFocusLost
         modeloproduto.setIdproduto(Integer.parseInt(jTFIdProduto.getText()));
         controleproduto.retornadados(modeloproduto);
-        
+
         jTFDescProduto.setText(modeloproduto.getDsproduto());
         jTFValor.setText(Double.toString(modeloproduto.getVlvenda()));
         estoque = modeloproduto.getQtestoque();
-        
+
     }//GEN-LAST:event_jTFIdProdutoFocusLost
 
     private void jTFValorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFValorFocusLost
         int quantidade = Integer.parseInt(jTFQtde.getText());
         double valor = Double.parseDouble(jTFValor.getText());
-        
+
         jTFTotItem.setText(Double.toString(quantidade * valor));
-        
-        
+
+
     }//GEN-LAST:event_jTFValorFocusLost
 
     private void jTFQtdeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFQtdeFocusLost
         int qtdvenda = Integer.parseInt(jTFQtde.getText());
-        
-        if (qtdvenda > estoque){
+
+        if (qtdvenda > estoque) {
             JOptionPane.showMessageDialog(null, "Quantidade de estoque insuficiente \n" + "Qtde Estoque :" + estoque);
             jTFQtde.setText("");
             jTFTotItem.setText("");
         }
     }//GEN-LAST:event_jTFQtdeFocusLost
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+
+        modnf.setIdcliente(Integer.parseInt(jTFIdClietne.getText()));
+        modnf.setVltotal(Double.parseDouble(jTFVlTotal.getText()));
+        controlenf.incluir(modnf);
+        jTFIdNF.setText(Integer.toString(modnf.getIdnf()));
+        
+        incluirprodutos();
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     public static void main(String args[]) {
         try {
@@ -642,4 +659,32 @@ public class NF extends javax.swing.JFrame {
     private javax.swing.JTable jTbConsulta;
     private javax.swing.JTable jTbIncluir;
     // End of variables declaration//GEN-END:variables
+
+    public void somatotal() {
+        DefaultTableModel Tabela = (DefaultTableModel) jTbIncluir.getModel();
+        int totlinha = Tabela.getRowCount();
+        double total = 0;
+        for (int i = 0; i < totlinha; i++) {
+            String vl = ((String) Tabela.getValueAt(i, 5));
+            total = total + (Double.parseDouble(vl));
+        }
+        jTFVlTotal.setText(Double.toString(total));
+    }
+
+    public void incluirprodutos() {
+        DefaultTableModel Tabela = (DefaultTableModel) jTbIncluir.getModel();
+        int totlinha = Tabela.getRowCount();
+        for (int i = 0; i < totlinha; i++) {
+            String item = (Tabela.getValueAt(i, 1).toString());
+            String valor = (Tabela.getValueAt(i, 4).toString());
+            String quantidade = (Tabela.getValueAt(i, 3).toString());
+            modeloitensnf.setIdnf(Integer.parseInt(jTFIdNF.getText()));
+            modeloitensnf.setIdproduto(Integer.parseInt(item));
+            modeloitensnf.setQtdproduto(Double.parseDouble(quantidade));
+            modeloitensnf.setVlproduto(Double.parseDouble(valor));
+            controleitensnf.incluir(modeloitensnf);
+        }
+
+    }
+
 }
